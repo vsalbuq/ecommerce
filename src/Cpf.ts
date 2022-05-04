@@ -9,7 +9,7 @@ export default class Cpf {
     this.value = value;
   }
 
-  getValue(){
+  getValue() {
     return this.value;
   }
 
