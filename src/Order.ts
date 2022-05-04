@@ -30,6 +30,8 @@ export default class Order {
   }
 
   addCoupon(coupon: Coupon) {
+    if (coupon.expirationDate < new Date())
+      throw new Error("Cupom de desconto expirado");
     this.coupon = coupon;
   }
 }
