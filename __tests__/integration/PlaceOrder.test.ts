@@ -1,7 +1,7 @@
-import CouponRepositoryMemory from "../src/CouponRepositoryMemory";
-import OrderRepositoryMemory from "../src/OrderRepositoryMemory";
-import PlaceOrder from "../src/PlaceOrder";
-import ProductRepositoryMemory from "../src/ProductRepositoryMemory";
+import CouponRepositoryMemory from "../../src/infra/repository/memory/CouponRepositoryMemory";
+import OrderRepositoryMemory from "../../src/infra/repository/memory/OrderRepositoryMemory";
+import PlaceOrder from "../../src/application/usecase/PlaceOrder";
+import ProductRepositoryMemory from "../../src/infra/repository/memory/ProductRepositoryMemory";
 
 test("Deve fazer um pedido", function () {
   const productRepository = new ProductRepositoryMemory();

@@ -1,7 +1,7 @@
-import ICouponRepository from "./ICouponRepository";
-import IOrderRepository from "./IOrderRepository";
-import IProductRepository from "./IProductRepository";
-import Order from "./Order";
+import ICouponRepository from "../../domain/repository/interfaces/ICouponRepository";
+import IOrderRepository from "../../domain/repository/interfaces/IOrderRepository";
+import IProductRepository from "../../domain/repository/interfaces/IProductRepository";
+import Order from "../../domain/entity/Order";
 import PlaceOrderInput from "./PlaceOrderInput";
 import PlaceOrderOutput from "./PlaceOrderOutput";
 

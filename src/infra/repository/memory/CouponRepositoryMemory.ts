@@ -1,5 +1,5 @@
-import Coupon from "./Coupon";
-import ICouponRepository from "./ICouponRepository";
+import Coupon from "../../../domain/entity/Coupon";
+import ICouponRepository from "../../../domain/repository/interfaces/ICouponRepository";
 
 export default class CouponRepositoryMemory implements ICouponRepository {
   coupons: Coupon[];

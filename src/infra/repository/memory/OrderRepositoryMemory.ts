@@ -1,5 +1,5 @@
-import IOrderRepository from "./IOrderRepository";
-import Order from "./Order";
+import IOrderRepository from "../../../domain/repository/interfaces/IOrderRepository";
+import Order from "../../../domain/entity/Order";
 
 export default class OrderRepositoryMemory implements IOrderRepository {
   orders: Order[];

@@ -1,7 +1,7 @@
-import Coupon from "../src/Coupon";
-import Product from "../src/Product";
-import Order from "../src/Order";
-import Dimension from "../src/Dimension";
+import Coupon from "../../src/domain/entity/Coupon";
+import Product from "../../src/domain/entity/Product";
+import Order from "../../src/domain/entity/Order";
+import Dimension from "../../src/domain/entity/Dimension";
 
 test("Deve criar um pedido", function () {
   const order = new Order("935.411.347-80");

@@ -1,6 +1,6 @@
-import Dimension from "../src/Dimension";
-import FreightCalculator from "../src/FreightCalculator";
-import Product from "../src/Product";
+import Dimension from "../../src/domain/entity/Dimension";
+import FreightCalculator from "../../src/domain/entity/FreightCalculator";
+import Product from "../../src/domain/entity/Product";
 
 test("Deve calcular o valor do frete com base nas dimensões (altura, largura e profundidade em cm) e o peso dos produtos (em kg)", function () {
   const product = new Product(

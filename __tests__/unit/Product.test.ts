@@ -1,5 +1,5 @@
-import Dimension from "../src/Dimension";
-import Product from "../src/Product";
+import Dimension from "../../src/domain/entity/Dimension";
+import Product from "../../src/domain/entity/Product";
 
 test("Deve criar um produto com dimensões e calcular seu volume", function () {
   const product = new Product(
