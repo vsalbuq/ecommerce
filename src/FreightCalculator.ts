@@ -1,16 +1,14 @@
+import Product from "./Product";
+
 export default class FreightCalculator {
   private static DISTANCE: number = 1000;
 
-  static calculate(
-    height: number,
-    width: number,
-    length: number,
-    weight: number
-  ) {
-    const volumeInCm = height * width * length;
-    const volume = volumeInCm / 1000000;
-    const density = weight / volume;
-    const price = this.DISTANCE * volume * (density / 100);
-    return price < 10 ? 10 : price;
+  static calculate(product: Product, quantity: number) {
+    const price =
+      product.getVolume() *
+      this.DISTANCE *
+      (product.getDensity() / 100) *
+      quantity;
+    return price != 0 && price < 10 ? 10 : price;
   }
 }

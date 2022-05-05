@@ -1,6 +1,7 @@
 import Coupon from "../src/Coupon";
-import Item from "../src/Item";
+import Product from "../src/Product";
 import Order from "../src/Order";
+import Dimension from "../src/Dimension";
 
 test("Deve criar um pedido", function () {
   const order = new Order("935.411.347-80");
@@ -14,19 +15,25 @@ test("Não deve criar um pedido com CPF inválido", function () {
 
 test("Deve criar um pedido com 3 itens", function () {
   const order = new Order("935.411.347-80");
-  order.addItem(new Item(1, "Instrumentos Musicais", "Guitarra", 1000), 1);
-  order.addItem(new Item(2, "Instrumentos Musicais", "Amplificador", 5000), 1);
-  order.addItem(new Item(3, "Acessórios", "Cabo", 30), 3);
+  order.addItem(new Product(1, "Instrumentos Musicais", "Guitarra", 1000), 1);
+  order.addItem(
+    new Product(2, "Instrumentos Musicais", "Amplificador", 5000),
+    1
+  );
+  order.addItem(new Product(3, "Acessórios", "Cabo", 30), 3);
   const total = order.getTotal();
   expect(total).toBe(6090);
 });
 
 test("Deve criar um pedido com 3 itens usando cupom de desconto", function () {
   const order = new Order("935.411.347-80");
-  order.addItem(new Item(1, "Instrumentos Musicais", "Guitarra", 1000), 1);
-  order.addItem(new Item(2, "Instrumentos Musicais", "Amplificador", 5000), 1);
-  order.addItem(new Item(3, "Acessórios", "Cabo", 30), 3);
-  const coupon = new Coupon("VALE20", 20, new Date());
+  order.addItem(new Product(1, "Instrumentos Musicais", "Guitarra", 1000), 1);
+  order.addItem(
+    new Product(2, "Instrumentos Musicais", "Amplificador", 5000),
+    1
+  );
+  order.addItem(new Product(3, "Acessórios", "Cabo", 30), 3);
+  const coupon = new Coupon("VALE20", 20);
   order.addCoupon(coupon);
   const total = order.getTotal();
   expect(total).toBe(4872);
@@ -34,13 +41,53 @@ test("Deve criar um pedido com 3 itens usando cupom de desconto", function () {
 
 test("Não deve aplicar cupom de desconto expirado", function () {
   const order = new Order("935.411.347-80");
-  order.addItem(new Item(1, "Instrumentos Musicais", "Guitarra", 1000), 1);
-  order.addItem(new Item(2, "Instrumentos Musicais", "Amplificador", 5000), 1);
-  order.addItem(new Item(3, "Acessórios", "Cabo", 30), 3);
-  const coupon = new Coupon("VALE20", 20, new Date("2022-01-01"));
+  order.addItem(new Product(1, "Instrumentos Musicais", "Guitarra", 1000), 1);
+  order.addItem(
+    new Product(2, "Instrumentos Musicais", "Amplificador", 5000),
+    1
+  );
+  order.addItem(new Product(3, "Acessórios", "Cabo", 30), 3);
+  const coupon = new Coupon("VALE20", 20, new Date("2022-01-01T10:00:00"));
   expect(() => order.addCoupon(coupon)).toThrowError(
     "Cupom de desconto expirado"
   );
   const total = order.getTotal();
   expect(total).toBe(6090);
+});
+
+test("Deve criar um pedido com 3 itens e calcular o frete", function () {
+  const order = new Order("935.411.347-80");
+  order.addItem(
+    new Product(
+      1,
+      "Instrumentos Musicais",
+      "Guitarra",
+      1000,
+      new Dimension(100, 30, 10),
+      3
+    ),
+    1
+  );
+  order.addItem(
+    new Product(
+      2,
+      "Instrumentos Musicais",
+      "Amplificador",
+      5000,
+      new Dimension(100, 50, 50),
+      20
+    ),
+    1
+  );
+  order.addItem(
+    new Product(3, "Acessórios", "Cabo", 30, new Dimension(10, 10, 10), 1),
+    3
+  );
+  const total = order.getTotal();
+  const noFreightTotal = 6090;
+  const freightGuitar = 30;
+  const freightAmp = 200;
+  const freightCabo = 10 + 10 + 10;
+
+  expect(total).toBe(noFreightTotal + freightGuitar + freightAmp + freightCabo);
 });
